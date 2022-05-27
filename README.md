@@ -1,4 +1,5 @@
 # samy-front-end
+Samy is a dice board game of reasoned chance invented by Noé Peyre.
 
 ## Project setup
 ```
