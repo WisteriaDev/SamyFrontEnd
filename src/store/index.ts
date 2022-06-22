@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import { createStore, Store } from 'vuex'
 
 const axios = require('axios');
 const instance = axios.create({
@@ -17,15 +17,42 @@ export default createStore({
   state: {
     status: '',
     token: token,
+    username: '',
+    wins: '',
+    losses: '',
+    games: '',
+    id: '',
+    date: ''
   },
   getters: {
+    getUsername: function (state) {
+      return state.username
+    }
   },
   mutations: {
     setStatus: function (state, status) {
-      state.status = status;
+      state.status = status
     },
     setToken: function (state, token) {
-      state.token = token;
+      state.token = token
+    },
+    setUsername: function (state, username) {
+      state.username = username
+    },
+    setWins: function (state, wins) {
+      state.wins = wins
+    },
+    setLosses: function (state, losses) {
+      state.losses = losses
+    },
+    setGames: function (state, games) {
+      state.games = games
+    },
+    setId: function (state, id) {
+      state.id = id
+    },
+    setDate: function (state, date) {
+      state.date = date
     },
   },
   actions: {
@@ -42,6 +69,60 @@ export default createStore({
           reject(error);
         });
       });
+    },
+    renameAccount: ({commit}, userInfos) =>{
+      commit('setStatus', 'loading');
+      return new Promise ((resolve, reject) => {
+        var config = {headers:{'auth-token': localStorage.getItem('token')}}
+        console.log(userInfos);
+        instance.post('/user/rename', userInfos, config)
+        .then(function (response: any) {
+          commit('setStatus', '');
+          resolve(response);
+        })
+        .catch(function (error: any) {
+          reject(error);
+        });
+      });
+    },
+    getInfos: ({commit}) => {
+      return new Promise ((resolve, reject) => {
+        var config = {headers:{'auth-token': localStorage.getItem('token')}}
+        instance.get('/user/info', config)
+        .then(function (response: any) {
+        commit('setUsername', response.data.username);
+        commit('setWins', response.data.wins);
+        commit('setLosses', response.data.losses);
+        commit('setGames', response.data.games);
+        commit('setId', response.data._id);
+        commit('setDate', response.data.date);
+        resolve(response);
+        })
+        .catch(function (error: any) {
+          reject(error);
+        });
+      });
+      
+    },
+    deleteAccount: ({commit}) => {
+      return new Promise ((resolve, reject) => {
+        var config = {headers:{'auth-token': localStorage.getItem('token')}}
+        instance.get('/user/delete', config)
+        .then(function (response: any) {
+        commit('setUsername', '');
+        commit('setWins', '');
+        commit('setLosses', '');
+        commit('setGames', '');
+        commit('setId', '');
+        commit('setDate', '');
+        commit('setToken', '');
+        resolve(response);
+        })
+        .catch(function (error: any) {
+          reject(error);
+        });
+      });
+      
     }
   },
   modules: {

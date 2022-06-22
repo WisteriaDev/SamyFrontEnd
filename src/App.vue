@@ -22,5 +22,23 @@
     color:#ececec !important;
     filter: none !important;
     cursor: not-allowed !important;
+    transition: background-color 0.5s ease;
+    filter: drop-shadow(0px 5px 0px #cecece);
   }
+
+* {
+  transition: all 0.5s ease;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 </style>

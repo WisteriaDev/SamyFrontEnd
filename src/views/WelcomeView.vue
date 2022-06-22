@@ -37,8 +37,9 @@ export default defineComponent({
       createAccount : function () {
           const self = this;
           console.log(this.username);
+          const Username = this.username[0].toUpperCase() + this.username.substr(1).toLowerCase();
           this.$store.dispatch('createAccount', {
-              username: this.username,
+              username: Username,
           }).then(function(response) {
               localStorage.setItem('token', response.data.token);
               self.$store.commit('setToken', response.data.token);
@@ -56,7 +57,7 @@ export default defineComponent({
       console.log('Welcome page: Redirecting to "/"')
       this.$router.push('/');
     }
-  },
+  }
 });
 </script>
 
@@ -78,13 +79,13 @@ export default defineComponent({
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 80vw;
+        width: 90vw;
     }
 
     .card{
         background-color: #fff;
         padding: 5vw;
-        border-radius: 10px;
+        border-radius: 20px;
         filter: drop-shadow(4px 4px 4px rgb(0, 0, 0, 0.5));
         font-family: 'Lexend', sans-serif;
     }
@@ -98,17 +99,17 @@ export default defineComponent({
     }
     .card input {
         width: 100%;
-        height: 50px;
+        height: 6.5vh;
         font-family: 'Lexend', sans-serif;
         outline: none;
-        border: 2px solid #C4C4C4;
-        border-radius: 5px !important;
+        border: 3px solid #C4C4C4;
+        border-radius: 15px !important;
         box-sizing: border-box;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 22px;
         color: #2F2F2F !important;
         text-align: center; 
-        margin-bottom: 5vw;
+        margin-bottom: 3vw;
     }
 
     .card input::placeholder {
@@ -118,17 +119,19 @@ export default defineComponent({
 
     .card button {
         width: 100%;
-        height: 50px;
+        height: 6.5vh;
         font-family: 'Lexend', sans-serif;
         background-color:#1473E6;
         color: #fff;
-        font-size: 18px;
+        font-size: 22px;
         cursor: pointer;
         outline: none;
         border: none;
-        border-radius: 5px !important;
+        border-radius: 15px !important;
         font-weight: 600;
         filter: drop-shadow(0px 5px 0px rgb(0, 99, 220, 1));
+        transition: all 0.5s ease;
+
     }
 
     input{ 
@@ -137,4 +140,5 @@ export default defineComponent({
         padding: 0;
         margin: 0;
     }
+
 </style>

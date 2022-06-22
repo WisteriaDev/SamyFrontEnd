@@ -6,17 +6,27 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
   },
   {
     path: '/game',
     name: 'game',
-    component: () => import(/* webpackChunkName: "about" */ '../views/GameView.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/GameView.vue'),
+  },
+  {
+    path: '/account',
+    name: 'account',
+    component: () => import(/* webpackChunkName: "about" */ '../views/AccountView.vue'),
+  },
+  {
+    path: '/delete',
+    name: 'delete',
+    component: () => import(/* webpackChunkName: "about" */ '../views/DeleteView.vue'),
   },
   {
     path: '/welcome',
     name: 'welcome',
-    component: WelcomeView
+    component: WelcomeView,
   }
 ]
 
